@@ -1,0 +1,18 @@
+ALGORITHM MILK_PAYMENT
+INPUT farmer_id, litres, fat, snf, shift
+IF litres < 0 OR fat < 2.0 OR fat > 7.0 OR snf < 0 THEN
+    DISPLAY validation error
+    STOP this entry
+END IF
+fat_steps <- ROUND((fat - 3.5) / 0.1)
+snf_steps <- ROUND((snf - 8.5) / 0.1)
+rate <- 30.00 + fat_steps * 0.40 + snf_steps * 0.30
+payment <- ROUND(litres * rate, 2)
+DISPLAY farmer_id, rate, payment
+ADD payment to ten-day total
+END ALGORITHM
+
+Flowchart steps to draw in Word/PowerPoint:
+Start -> Read farmer/shift/litres/fat/SNF -> Validate? -> No: display error and return to input
+-> Yes: calculate fat and SNF steps -> calculate rate -> calculate payment -> update total
+-> display result -> more entries? -> Yes: read next entry / No: display ten-day total -> End.
